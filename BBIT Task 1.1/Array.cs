@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Versioning;
 
 namespace BBIT_Task_1._1
 {
@@ -10,18 +7,19 @@ namespace BBIT_Task_1._1
     {
         private int[,] _array;
         private int _columnSize;
+        public delegate int ForEachDelegate(int item, int x, int y);
 
         public Array(int min = 0, int max = 0)
         {
             // Defining a new array
-            _array = new int[20,20];
+            _array = new int[20, 20];
             var rand = new Random();
 
             // Filling an array with random numbers
             for (int y = 0; y < 20; y++)
                 for (int x = 0; x < 20; x++)
-                    _array[y,x] = rand.Next(min, max);
-                
+                    _array[y, x] = rand.Next(min, max);
+
 
             // Finding optimal column size
             _columnSize = Math.Max(min.ToString().Length, max.ToString().Length) + 1;
@@ -29,7 +27,7 @@ namespace BBIT_Task_1._1
 
         public Coords GetMinCoords()
         {
-            int minNumber = _array[0,0];
+            int minNumber = _array[0, 0];
             Coords minNumberCoords = new Coords();
 
             for (int y = 0; y < 20; y++)
@@ -45,7 +43,7 @@ namespace BBIT_Task_1._1
 
         public Coords GetMaxCoords()
         {
-            int minNumber = _array[0,0];
+            int minNumber = _array[0, 0];
             Coords maxNumberCoords = new Coords();
 
             for (int y = 0; y < 20; y++)
@@ -85,6 +83,7 @@ namespace BBIT_Task_1._1
             }
         }
 
+        [SupportedOSPlatform("windows")]
         public void Render(int xPos = 0, int yPos = 0)
         {
             Console.SetBufferSize(Math.Max(Console.BufferWidth, _columnSize * 20 + xPos), Console.BufferHeight);
@@ -98,7 +97,7 @@ namespace BBIT_Task_1._1
                     Console.Write(number);
                 }
             }
-                
+
         }
     }
 }
